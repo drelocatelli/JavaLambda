@@ -1,4 +1,4 @@
-package lambda;
+package lambda.parts;
 
 import java.util.Arrays;
 
@@ -30,8 +30,6 @@ public class part7 {
 					.average()
 					.getAsDouble()
 				);
-		
-		
 		
 	}
 	
