@@ -1,6 +1,6 @@
-import Entity.CalculaIMC;
 import Entity.Pessoa;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,36 +10,35 @@ public class Program {
 	public static void main(String[] args) {
 
 		// pessoas
-
-		Pessoa[] pessoa = new Pessoa[5];
-		pessoa[0] = new Pessoa("João", 50, 1.60);
-		pessoa[1] = new Pessoa("Maria", 100, 1.80);
-		pessoa[2] = new Pessoa("Joana", 65, 1.70);
-		pessoa[3] = new Pessoa("Sérgio", 180, 1.70);
-		pessoa[4] = new Pessoa("Fernanda", 189, 1.50);
+		Pessoa[] pessoa = new Pessoa[6];
+		pessoa[0] = new Pessoa(1,"João", 50, 1.60);
+		pessoa[1] = new Pessoa(2,"Maria", 100, 1.80);
+		pessoa[2] = new Pessoa(3,"Joana", 65, 1.70);
+		pessoa[3] = new Pessoa(4,"Sérgio", 180, 1.70);
+		pessoa[4] = new Pessoa(5,"Fernanda", 189, 1.50);
+		pessoa[5] = new Pessoa(6,"Andressa", 50, 1.65);
 
 		// calculo
-		CalculaIMC[] calculos = new CalculaIMC[pessoa.length];
 		for(int i = 0; i < pessoa.length; i++) {
-			calculos[i] = new CalculaIMC(i, pessoa[i].getPeso(), pessoa[i].getAltura());
-
 			System.out.printf("[%s] \n", pessoa[i].getNome());
 			System.out.printf("Altura: %.2f \n", pessoa[i].getAltura());
 			System.out.printf("Peso kg: %.2f \n", pessoa[i].getPeso());
-			System.out.printf("IMC: %.2f \n", calculos[i].imc());
-			System.out.printf("Classificação: %s \n\n", calculos[i].classificacao(calculos[i].imc()));
+			System.out.printf("IMC: %.2f \n", pessoa[i].imc());
+			System.out.printf("Classificação: %s \n\n", pessoa[i].classificacao(pessoa[i].imc()));
 		}
 
 		System.out.println("Pessoas com obesidade grau 3 (mórbida): ");
-		List<Integer> pessoasObesas = Arrays.asList(calculos).stream()
+		List<String> pessoasObesas = Arrays.asList(pessoa).stream()
 				.filter(i -> i.classificacao(i.imc()).equals("Obesidade grau 3 (mórbida)"))
-				.map(i -> i.getId())
+				.map(Pessoa::getNome)
 				.collect(Collectors.toList());
+		System.out.println(pessoasObesas);
 
-		for(int indice: pessoasObesas) {
-			System.out.printf("%s \n", pessoa[indice].getNome());
-		}
+	}
 
+	public static String amount(double value) {
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		return "R$ " +decimalFormat.format(value);
 	}
 
 }
