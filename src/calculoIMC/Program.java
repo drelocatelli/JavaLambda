@@ -11,12 +11,12 @@ public class Program {
 
 		// pessoas
 		Pessoa[] pessoa = new Pessoa[6];
-		pessoa[0] = new Pessoa(1,"João", 50, 1.60);
-		pessoa[1] = new Pessoa(2,"Maria", 100, 1.80);
-		pessoa[2] = new Pessoa(3,"Joana", 65, 1.70);
-		pessoa[3] = new Pessoa(4,"Sérgio", 180, 1.70);
-		pessoa[4] = new Pessoa(5,"Fernanda", 189, 1.50);
-		pessoa[5] = new Pessoa(6,"Andressa", 50, 1.65);
+		pessoa[0] = new Pessoa("João", 50, 1.60);
+		pessoa[1] = new Pessoa("Maria", 100, 1.80);
+		pessoa[2] = new Pessoa("Joana", 65, 1.70);
+		pessoa[3] = new Pessoa("Sérgio", 180, 1.70);
+		pessoa[4] = new Pessoa("Fernanda", 189, 1.50);
+		pessoa[5] = new Pessoa("Andressa", 50, 1.65);
 
 		// calculo
 		for(int i = 0; i < pessoa.length; i++) {
@@ -24,15 +24,30 @@ public class Program {
 			System.out.printf("Altura: %.2f \n", pessoa[i].getAltura());
 			System.out.printf("Peso kg: %.2f \n", pessoa[i].getPeso());
 			System.out.printf("IMC: %.2f \n", pessoa[i].imc());
-			System.out.printf("Classificação: %s \n\n", pessoa[i].classificacao(pessoa[i].imc()));
+			System.out.printf("Classificação: %s \n", pessoa[i].classificacao(pessoa[i].imc()));
+			System.out.printf("Grau: %d \n\n", pessoa[i].getGrau());
 		}
 
 		System.out.println("Pessoas com obesidade grau 3 (mórbida): ");
 		List<String> pessoasObesas = Arrays.asList(pessoa).stream()
-				.filter(i -> i.classificacao(i.imc()).equals("Obesidade grau 3 (mórbida)"))
+				.filter(i -> i.getGrau() == 5)
 				.map(Pessoa::getNome)
 				.collect(Collectors.toList());
 		System.out.println(pessoasObesas);
+
+		System.out.println("Pessoas abaixo do peso:");
+		List<String> pessoasAbaixoPeso = Arrays.asList(pessoa).stream()
+				.filter(i -> i.getGrau() == 0)
+				.map(Pessoa::getNome)
+				.collect(Collectors.toList());
+		System.out.println(pessoasAbaixoPeso);
+
+		System.out.println("Pessoas com peso ideal:");
+		List<String> pessoasPesoIdeal = Arrays.asList(pessoa).stream()
+				.filter(i -> i.getGrau() == 1)
+				.map(Pessoa::getNome)
+				.collect(Collectors.toList());
+		System.out.println(pessoasPesoIdeal);
 
 	}
 
