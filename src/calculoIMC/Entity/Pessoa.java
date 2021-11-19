@@ -2,13 +2,12 @@ package Entity;
 
 public class Pessoa extends CalculaIMC {
 
-	private int id;
 	private String nome;
 	private double peso;
 	private double altura;
 
-	public Pessoa(int id, String nome, double peso, double altura) {
-		super(id, peso, altura);
+	public Pessoa(String nome, double peso, double altura) {
+		super(peso, altura);
 		this.nome = nome;
 		this.peso = peso;
 		this.altura = altura;
@@ -26,4 +25,12 @@ public class Pessoa extends CalculaIMC {
 		return altura;
 	}
 
+	@Override
+	public String toString() {
+		return "Pessoa{" +
+				"nome='" + nome + '\'' +
+				", peso=" + peso +
+				", altura=" + altura +
+				'}';
+	}
 }
