@@ -26,14 +26,18 @@ public class Program {
 		System.out.println(pessoa + "\n");
 
 		// calculo
-		for(int i = 0; i < pessoas.length; i++) {
-			System.out.printf("[%s] \n", pessoas[i].getNome());
-			System.out.printf("Altura: %.2f \n", pessoas[i].getAltura());
-			System.out.printf("Peso kg: %.2f \n", pessoas[i].getPeso());
-			System.out.printf("IMC: %.2f \n", pessoas[i].imc());
-			System.out.printf("Classificação: %s \n", pessoas[i].classificacao(pessoas[i].imc()));
-			System.out.printf("Grau: %d \n\n", pessoas[i].getGrau());
-		}
+		var perfis = Arrays.asList(pessoas).stream()
+				.map(p -> {
+					return String.format("Nome: %s \n" +
+									"Altura: %.2f \n" +
+									"Peso kg: %.2f \n" +
+									"IMC: %.2f \n" +
+									"Classificação: %s \n" +
+									"Grau: %d \n",
+							p.getNome(), p.getAltura(), p.getPeso(), p.imc(), p.classificacao(p.imc()), p.getGrau());
+				})
+				.collect(Collectors.toList());
+		System.out.println(perfis);
 
 		System.out.println("Pessoas com obesidade grau 3 (mórbida): ");
 		List<String> pessoasObesas = Arrays.asList(pessoas).stream()
