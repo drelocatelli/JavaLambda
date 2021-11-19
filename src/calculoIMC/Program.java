@@ -20,24 +20,10 @@ public class Program {
 		};
 
 		var pessoa = Arrays.asList(pessoas)
-				.stream().map(Object::toString)
+				.stream().map(p -> p.toString())
 				.collect(Collectors.toList());
 
 		System.out.println(pessoa + "\n");
-
-		// calculo
-		var perfis = Arrays.asList(pessoas).stream()
-				.map(p -> {
-					return String.format("Nome: %s \n" +
-									"Altura: %.2f \n" +
-									"Peso kg: %.2f \n" +
-									"IMC: %.2f \n" +
-									"Classificação: %s \n" +
-									"Grau: %d \n",
-							p.getNome(), p.getAltura(), p.getPeso(), p.imc(), p.classificacao(p.imc()), p.getGrau());
-				})
-				.collect(Collectors.toList());
-		System.out.println(perfis);
 
 		System.out.println("Pessoas com obesidade grau 3 (mórbida): ");
 		List<String> pessoasObesas = Arrays.asList(pessoas).stream()
