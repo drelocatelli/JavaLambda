@@ -31,6 +31,8 @@ public class Pessoa extends CalculaIMC {
 				"nome='" + nome + '\'' +
 				", peso=" + peso +
 				", altura=" + altura +
+				", IMC=" + String.format("%.2f", imc()) +
+				", classificação=" + classificacao() +
 				'}';
 	}
 }
